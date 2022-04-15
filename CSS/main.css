@@ -1,7 +1,11 @@
 body {
   font-family: "Rubik", sans-serif;
   text-align: center;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(240, 240, 240);
+}
+
+.pokedex-header h1 {
+  color: red;
 }
 
 .wrapper {
@@ -12,9 +16,34 @@ body {
 }
 
 .item {
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 30px 0;
   display: flex;
   flex-direction: column;
   background-color: white;
+}
+
+.types {
+  margin-bottom: 20px;
+}
+
+.types li {
+  list-style-type: none;
+}
+
+.stats {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.stat {
+  flex: 1;
+}
+
+.stat p {
+  font-weight: bold;
+}
+.stat-icon {
+  max-width: 40px;
 }
