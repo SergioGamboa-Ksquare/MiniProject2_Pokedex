@@ -1,6 +1,8 @@
 import { SearchPokemon } from "./SearchPokemon.js";
+import { ClearSearch } from "./ClearSearch.js";
 const container = document.querySelector(".wrapper");
 const searchButton = document.querySelector(".button-input");
+const clearButton = document.querySelector(".clear-input");
 
 const pokemonObject = {
   pokemon: "",
@@ -107,6 +109,11 @@ searchButton.addEventListener("click", () => {
   const searchEngine = new SearchPokemon();
   searchEngine.searchPokemon();
 });
+
+clearButton.addEventListener("click", () => {
+  const clearEngine = new ClearSearch();
+  clearEngine.clear();
+})
 
 window.onload = () => {
   getPokemons();
