@@ -30,6 +30,46 @@ let defStat = "";
 let speedIcon = "";
 let speedStat = "";
 
+let pokeName = "";
+let pokeImage = "";
+let pokeTipo = "";
+let pokeLife = "";
+let pokeAtack = "";
+let pokeDefense = "";
+let pokeSpeed = "";
+
+const getPokemonData = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  pokeName = data.name;
+  pokeImage = data.sprites.front_default;
+  pokeTipo = data.types[0].type.name;
+  pokeLife = data.stats[0].base_stat;
+  pokeAtack = data.stats[1].base_stat;
+  pokeDefense = data.stats[2].base_stat;
+  pokeSpeed = data.stats[5].base_stat;
+  createCard();
+};
+
+const getPokemons = () => {
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/charizard");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/pikachu");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/eevee");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/charmander");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/squirtle");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/metapod");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/poliwag");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/psyduck");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/persian");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/vulpix");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/nidorina");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/sandslash");
+};
+
+window.onload = () => {
+  getPokemons();
+};
+
 const generateElements = () => {
   pokemon = document.createElement("div");
   mainInfo = document.createElement("div");
@@ -73,26 +113,26 @@ const assignPropierties = () => {
   speedContainer.classList.add("stat");
   speedContainer.classList.add("speed");
 
-  pokemonName.innerHTML = dummy_info["pokemonName"];
+  pokemonName.innerHTML = pokeName;
 
-  sprite.src = dummy_info["image"];
+  sprite.src = pokeImage;
 
   typesHeader.innerHTML = "Types:";
 
   hpIcon.src = "../IMG/hp.png";
-  hpStat.innerHTML = dummy_info["hp"];
+  hpStat.innerHTML = pokeLife;
   hpIcon.classList.add("stat-icon");
 
   attackIcon.src = "../IMG/attack.png";
-  attackStat.innerHTML = dummy_info["attack"];
+  attackStat.innerHTML = pokeAtack;
   attackIcon.classList.add("stat-icon");
 
   defIcon.src = "../IMG/defense.png";
-  defStat.innerHTML = dummy_info["def"];
+  defStat.innerHTML = pokeDefense;
   defIcon.classList.add("stat-icon");
 
   speedIcon.src = "../IMG/speed.png";
-  speedStat.innerHTML = dummy_info["speed"];
+  speedStat.innerHTML = pokeSpeed;
   speedIcon.classList.add("stat-icon");
 };
 
@@ -116,11 +156,14 @@ const appendElements = () => {
 
   typesContainer.appendChild(typesHeader);
   typesContainer.appendChild(typesList);
-  dummy_info["types"].map((type) => {
-    let pokemonType = document.createElement("li");
-    pokemonType.innerHTML = type;
-    typesContainer.appendChild(pokemonType);
-  });
+  //dummy_info["types"].map((type) => {
+  //let pokemonType = document.createElement("li");
+  //pokemonType.innerHTML = type;
+  //typesContainer.appendChild(pokemonType);
+  //});
+  let pokemonType = document.createElement("li");
+  pokemonType.innerHTML = pokeTipo;
+  typesContainer.appendChild(pokemonType);
 
   mainInfo.appendChild(pokemonName);
   mainInfo.appendChild(sprite);
@@ -137,9 +180,3 @@ const createCard = () => {
   assignPropierties();
   appendElements();
 };
-
-let i = 0;
-while (i < 12) {
-  createCard();
-  i++;
-}
