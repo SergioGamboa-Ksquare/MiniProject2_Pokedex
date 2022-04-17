@@ -1,14 +1,13 @@
 class SearchPokemon {
   searchPokemon = () => {
     const container = document.querySelector(".wrapper");
-    const searchContainer = document.querySelector(".search-container");
     const searchInput = document.querySelector(".text-input");
+    const clearInput = document.querySelector(".clear-input");
+    const failedSearch = document.querySelector(".failed-search");
 
     const nodeList = container.childNodes;
     const searchedPokemon = searchInput.value.toLowerCase();
-    const failedSearch = document.createElement("h2");
-    failedSearch.classList.add("failed-search");
-    failedSearch.innerHTML = "No results were found!";
+    
     let found = false;
 
     for (let i = 0; i < nodeList.length; i++) {
@@ -24,8 +23,9 @@ class SearchPokemon {
       }
     }
     if (!found) {
-      searchContainer.appendChild(failedSearch);
+      failedSearch.classList.remove("hidden");
     }
+    clearInput.classList.remove("hidden");
   };
 }
 
