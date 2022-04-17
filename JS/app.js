@@ -15,6 +15,7 @@ let mainInfo = "";
 let typesContainer = "";
 let statsContainer = "";
 let pokemonName = "";
+let pokemonUrl="";
 let sprite = "";
 let typesHeader = "";
 let hpContainer = "";
@@ -37,11 +38,13 @@ let pokeLife = "";
 let pokeAtack = "";
 let pokeDefense = "";
 let pokeSpeed = "";
+let pokeUrl="";
 
-const getPokemonData = async (url) => {
+const getPokemonData = async (url, wiki) => {
   const res = await fetch(url);
   const data = await res.json();
   pokeName = data.name;
+  pokeUrl = wiki;
   pokeImage = data.sprites.front_default;
   pokeTipo = data.types[0].type.name;
   pokeLife = data.stats[0].base_stat;
@@ -52,18 +55,18 @@ const getPokemonData = async (url) => {
 };
 
 const getPokemons = () => {
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/charizard");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/pikachu");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/eevee");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/charmander");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/squirtle");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/metapod");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/poliwag");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/psyduck");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/persian");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/vulpix");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/nidorina");
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/sandslash");
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/charizard", 'https://www.wikidex.net/wiki/Charizard');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/pikachu",'https://www.wikidex.net/wiki/Pikachu');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/eevee", 'https://www.wikidex.net/wiki/Eevee');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/charmander",'https://www.wikidex.net/wiki/Charmander');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/squirtle", 'https://www.wikidex.net/wiki/Squirtle');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/metapod", 'https://www.wikidex.net/wiki/Metapod');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/poliwag", 'https://www.wikidex.net/wiki/Poliwag');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/psyduck", 'https://www.wikidex.net/wiki/Psyduck');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/persian", 'https://www.wikidex.net/wiki/Persian');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/vulpix", 'https://www.wikidex.net/wiki/Vulpix');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/nidorina", 'https://www.wikidex.net/wiki/Nidorina');
+  getPokemonData("https://pokeapi.co/api/v2/pokemon/sandslash", 'https://www.wikidex.net/wiki/Sandslash');
 };
 
 window.onload = () => {
@@ -80,6 +83,7 @@ const generateElements = () => {
   defContainer = document.createElement("div");
   speedContainer = document.createElement("div");
   pokemonName = document.createElement("h4");
+  pokemonUrl= document.createElement('a')
   sprite = document.createElement("img");
   typesHeader = document.createElement("h4");
   typesList = document.createElement("ul");
@@ -113,8 +117,10 @@ const assignPropierties = () => {
   speedContainer.classList.add("stat");
   speedContainer.classList.add("speed");
 
-  pokemonName.innerHTML = pokeName;
+  pokemonUrl.href=pokeUrl;
+  pokemonUrl.innerHTML = pokeName;
 
+  
   sprite.src = pokeImage;
 
   typesHeader.innerHTML = "Types:";
@@ -166,6 +172,7 @@ const appendElements = () => {
   typesContainer.appendChild(pokemonType);
 
   mainInfo.appendChild(pokemonName);
+  pokemonName.appendChild(pokemonUrl);
   mainInfo.appendChild(sprite);
 
   pokemon.appendChild(mainInfo);
