@@ -1,35 +1,33 @@
+import { SearchPokemon } from "./SearchPokemon.js";
 const container = document.querySelector(".wrapper");
+const searchButton = document.querySelector(".button-input");
 
-const dummy_info = {
-  pokemonName: "Ditto",
-  image: "./IMG/ditto.png",
-  types: ["normal", "flying"],
-  hp: 48,
-  attack: 48,
-  def: 48,
-  speed: 48,
+const pokemonObject = {
+  pokemon: "",
+  mainInfo: "",
+  typesContainer: "",
+  statsContainer: "",
+  pokemonName: "",
+  pokemonUrl: "",
+  sprite: "",
+  typesHeader: "",
+  hpContainer: "",
+  attackContainer: "",
+  defContainer: "",
+  speedContainer: "",
+  hpIcon: "",
+  hpTitle: "",
+  hpStat: "",
+  attackIcon: "",
+  attackTitle: "",
+  attackStat: "",
+  defIcon: "",
+  defTitle: "",
+  defStat: "",
+  speedIcon: "",
+  speedTitle: "",
+  speedStat: "",
 };
-
-let pokemon = "";
-let mainInfo = "";
-let typesContainer = "";
-let statsContainer = "";
-let pokemonName = "";
-let pokemonUrl="";
-let sprite = "";
-let typesHeader = "";
-let hpContainer = "";
-let attackContainer = "";
-let defContainer = "";
-let speedContainer = "";
-let hpIcon = "";
-let hpStat = "";
-let attackIcon = "";
-let attackStat = "";
-let defIcon = "";
-let defStat = "";
-let speedIcon = "";
-let speedStat = "";
 
 let pokeName = "";
 let pokeImage = "";
@@ -38,7 +36,7 @@ let pokeLife = "";
 let pokeAtack = "";
 let pokeDefense = "";
 let pokeSpeed = "";
-let pokeUrl="";
+let pokeUrl = "";
 
 const getPokemonData = async (url, wiki) => {
   const res = await fetch(url);
@@ -55,113 +53,165 @@ const getPokemonData = async (url, wiki) => {
 };
 
 const getPokemons = () => {
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/charizard", 'https://www.wikidex.net/wiki/Charizard');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/pikachu",'https://www.wikidex.net/wiki/Pikachu');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/eevee", 'https://www.wikidex.net/wiki/Eevee');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/charmander",'https://www.wikidex.net/wiki/Charmander');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/squirtle", 'https://www.wikidex.net/wiki/Squirtle');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/metapod", 'https://www.wikidex.net/wiki/Metapod');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/poliwag", 'https://www.wikidex.net/wiki/Poliwag');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/psyduck", 'https://www.wikidex.net/wiki/Psyduck');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/persian", 'https://www.wikidex.net/wiki/Persian');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/vulpix", 'https://www.wikidex.net/wiki/Vulpix');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/nidorina", 'https://www.wikidex.net/wiki/Nidorina');
-  getPokemonData("https://pokeapi.co/api/v2/pokemon/sandslash", 'https://www.wikidex.net/wiki/Sandslash');
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/charizard",
+    "https://www.wikidex.net/wiki/Charizard"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/pikachu",
+    "https://www.wikidex.net/wiki/Pikachu"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/eevee",
+    "https://www.wikidex.net/wiki/Eevee"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/charmander",
+    "https://www.wikidex.net/wiki/Charmander"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/squirtle",
+    "https://www.wikidex.net/wiki/Squirtle"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/metapod",
+    "https://www.wikidex.net/wiki/Metapod"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/poliwag",
+    "https://www.wikidex.net/wiki/Poliwag"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/psyduck",
+    "https://www.wikidex.net/wiki/Psyduck"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/persian",
+    "https://www.wikidex.net/wiki/Persian"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/vulpix",
+    "https://www.wikidex.net/wiki/Vulpix"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/nidorina",
+    "https://www.wikidex.net/wiki/Nidorina"
+  );
+  getPokemonData(
+    "https://pokeapi.co/api/v2/pokemon/sandslash",
+    "https://www.wikidex.net/wiki/Sandslash"
+  );
 };
+
+searchButton.addEventListener("click", () => {
+  const searchEngine = new SearchPokemon();
+  searchEngine.searchPokemon();
+});
 
 window.onload = () => {
   getPokemons();
 };
 
 const generateElements = () => {
-  pokemon = document.createElement("div");
-  mainInfo = document.createElement("div");
-  typesContainer = document.createElement("div");
-  statsContainer = document.createElement("div");
-  hpContainer = document.createElement("div");
-  attackContainer = document.createElement("div");
-  defContainer = document.createElement("div");
-  speedContainer = document.createElement("div");
-  pokemonName = document.createElement("h4");
-  pokemonUrl= document.createElement('a')
-  sprite = document.createElement("img");
-  typesHeader = document.createElement("h4");
-  typesList = document.createElement("ul");
-  pokemonType = document.createElement("li");
-  hpIcon = document.createElement("img");
-  hpStat = document.createElement("p");
-  attackIcon = document.createElement("img");
-  attackStat = document.createElement("p");
-  defIcon = document.createElement("img");
-  defStat = document.createElement("p");
-  speedIcon = document.createElement("img");
-  speedStat = document.createElement("p");
+  pokemonObject.pokemon = document.createElement("div");
+  pokemonObject.mainInfo = document.createElement("div");
+  pokemonObject.typesContainer = document.createElement("div");
+  pokemonObject.statsContainer = document.createElement("div");
+  pokemonObject.hpContainer = document.createElement("div");
+  pokemonObject.attackContainer = document.createElement("div");
+  pokemonObject.defContainer = document.createElement("div");
+  pokemonObject.speedContainer = document.createElement("div");
+  pokemonObject.pokemonName = document.createElement("h4");
+  pokemonObject.pokemonUrl = document.createElement("a");
+  pokemonObject.sprite = document.createElement("img");
+  pokemonObject.typesHeader = document.createElement("h4");
+  pokemonObject.typesList = document.createElement("ul");
+  pokemonObject.pokemonType = document.createElement("li");
+  pokemonObject.hpIcon = document.createElement("img");
+  pokemonObject.hpTitle = document.createElement("p");
+  pokemonObject.hpStat = document.createElement("p");
+  pokemonObject.attackIcon = document.createElement("img");
+  pokemonObject.attackTitle = document.createElement("p");
+  pokemonObject.attackStat = document.createElement("p");
+  pokemonObject.defIcon = document.createElement("img");
+  pokemonObject.defTitle = document.createElement("p");
+  pokemonObject.defStat = document.createElement("p");
+  pokemonObject.speedIcon = document.createElement("img");
+  pokemonObject.speedTitle = document.createElement("p");
+  pokemonObject.speedStat = document.createElement("p");
 };
 
 const assignPropierties = () => {
-  pokemon.classList.add("item");
+  pokemonObject.pokemon.classList.add("item");
 
-  mainInfo.classList.add("main-info");
-  typesContainer.classList.add("types");
-  statsContainer.classList.add("stats");
+  pokemonObject.mainInfo.classList.add("main-info");
+  pokemonObject.typesContainer.classList.add("types");
+  pokemonObject.statsContainer.classList.add("stats");
 
-  hpContainer.classList.add("stat");
-  hpContainer.classList.add("hp");
+  pokemonObject.hpContainer.classList.add("stat");
+  pokemonObject.hpContainer.classList.add("hp");
 
-  attackContainer.classList.add("stat");
-  attackContainer.classList.add("attack");
+  pokemonObject.attackContainer.classList.add("stat");
+  pokemonObject.attackContainer.classList.add("attack");
 
-  defContainer.classList.add("stat");
-  defContainer.classList.add("defense");
+  pokemonObject.defContainer.classList.add("stat");
+  pokemonObject.defContainer.classList.add("defense");
 
-  speedContainer.classList.add("stat");
-  speedContainer.classList.add("speed");
+  pokemonObject.speedContainer.classList.add("stat");
+  pokemonObject.speedContainer.classList.add("speed");
 
-  pokemonUrl.href=pokeUrl;
-  pokemonUrl.innerHTML = pokeName;
+  pokemonObject.pokemonUrl.href = pokeUrl;
+  pokemonObject.pokemonUrl.innerHTML = pokeName;
 
-  
-  sprite.src = pokeImage;
+  pokemonObject.sprite.src = pokeImage;
 
-  typesHeader.innerHTML = "Types:";
+  pokemonObject.typesHeader.innerHTML = "Types:";
 
-  hpIcon.src = "../IMG/hp.png";
-  hpStat.innerHTML = pokeLife;
-  hpIcon.classList.add("stat-icon");
+  pokemonObject.hpIcon.src = "../IMG/hp.png";
+  pokemonObject.hpTitle.innerHTML = "HP";
+  pokemonObject.hpStat.innerHTML = pokeLife;
+  pokemonObject.hpIcon.classList.add("stat-icon");
 
-  attackIcon.src = "../IMG/attack.png";
-  attackStat.innerHTML = pokeAtack;
-  attackIcon.classList.add("stat-icon");
+  pokemonObject.attackIcon.src = "../IMG/attack.png";
+  pokemonObject.attackTitle.innerHTML = "Attack";
+  pokemonObject.attackStat.innerHTML = pokeAtack;
+  pokemonObject.attackIcon.classList.add("stat-icon");
 
-  defIcon.src = "../IMG/defense.png";
-  defStat.innerHTML = pokeDefense;
-  defIcon.classList.add("stat-icon");
+  pokemonObject.defIcon.src = "../IMG/defense.png";
+  pokemonObject.defTitle.innerHTML = "Defense";
+  pokemonObject.defStat.innerHTML = pokeDefense;
+  pokemonObject.defIcon.classList.add("stat-icon");
 
-  speedIcon.src = "../IMG/speed.png";
-  speedStat.innerHTML = pokeSpeed;
-  speedIcon.classList.add("stat-icon");
+  pokemonObject.speedIcon.src = "../IMG/speed.png";
+  pokemonObject.speedTitle.innerHTML = "Speed";
+  pokemonObject.speedStat.innerHTML = pokeSpeed;
+  pokemonObject.speedIcon.classList.add("stat-icon");
 };
 
 const appendElements = () => {
-  hpContainer.appendChild(hpIcon);
-  hpContainer.appendChild(hpStat);
+  pokemonObject.hpContainer.appendChild(pokemonObject.hpIcon);
+  pokemonObject.hpContainer.appendChild(pokemonObject.hpTitle);
+  pokemonObject.hpContainer.appendChild(pokemonObject.hpStat);
 
-  attackContainer.appendChild(attackIcon);
-  attackContainer.appendChild(attackStat);
+  pokemonObject.attackContainer.appendChild(pokemonObject.attackIcon);
+  pokemonObject.attackContainer.appendChild(pokemonObject.attackTitle);
+  pokemonObject.attackContainer.appendChild(pokemonObject.attackStat);
 
-  defContainer.appendChild(defIcon);
-  defContainer.appendChild(defStat);
+  pokemonObject.defContainer.appendChild(pokemonObject.defIcon);
+  pokemonObject.defContainer.appendChild(pokemonObject.defTitle);
+  pokemonObject.defContainer.appendChild(pokemonObject.defStat);
 
-  speedContainer.appendChild(speedIcon);
-  speedContainer.appendChild(speedStat);
+  pokemonObject.speedContainer.appendChild(pokemonObject.speedIcon);
+  pokemonObject.speedContainer.appendChild(pokemonObject.speedTitle);
+  pokemonObject.speedContainer.appendChild(pokemonObject.speedStat);
 
-  statsContainer.appendChild(hpContainer);
-  statsContainer.appendChild(attackContainer);
-  statsContainer.appendChild(defContainer);
-  statsContainer.appendChild(speedContainer);
+  pokemonObject.statsContainer.appendChild(pokemonObject.hpContainer);
+  pokemonObject.statsContainer.appendChild(pokemonObject.attackContainer);
+  pokemonObject.statsContainer.appendChild(pokemonObject.defContainer);
+  pokemonObject.statsContainer.appendChild(pokemonObject.speedContainer);
 
-  typesContainer.appendChild(typesHeader);
-  typesContainer.appendChild(typesList);
+  pokemonObject.typesContainer.appendChild(pokemonObject.typesHeader);
+  pokemonObject.typesContainer.appendChild(pokemonObject.typesList);
   //dummy_info["types"].map((type) => {
   //let pokemonType = document.createElement("li");
   //pokemonType.innerHTML = type;
@@ -169,17 +219,17 @@ const appendElements = () => {
   //});
   let pokemonType = document.createElement("li");
   pokemonType.innerHTML = pokeTipo;
-  typesContainer.appendChild(pokemonType);
+  pokemonObject.typesContainer.appendChild(pokemonType);
 
-  mainInfo.appendChild(pokemonName);
-  pokemonName.appendChild(pokemonUrl);
-  mainInfo.appendChild(sprite);
+  pokemonObject.mainInfo.appendChild(pokemonObject.pokemonName);
+  pokemonObject.pokemonName.appendChild(pokemonObject.pokemonUrl);
+  pokemonObject.mainInfo.appendChild(pokemonObject.sprite);
 
-  pokemon.appendChild(mainInfo);
-  pokemon.appendChild(typesContainer);
-  pokemon.appendChild(statsContainer);
+  pokemonObject.pokemon.appendChild(pokemonObject.mainInfo);
+  pokemonObject.pokemon.appendChild(pokemonObject.typesContainer);
+  pokemonObject.pokemon.appendChild(pokemonObject.statsContainer);
 
-  container.appendChild(pokemon);
+  container.appendChild(pokemonObject.pokemon);
 };
 
 const createCard = () => {
