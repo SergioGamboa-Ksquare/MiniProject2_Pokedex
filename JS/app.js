@@ -33,7 +33,7 @@ const pokemonObject = {
 
 let pokeName = "";
 let pokeImage = "";
-let pokeTipo = "";
+let pokeTypes = "";
 let pokeLife = "";
 let pokeAtack = "";
 let pokeDefense = "";
@@ -46,7 +46,7 @@ const getPokemonData = async (url, wiki) => {
   pokeName = data.name;
   pokeUrl = wiki;
   pokeImage = data.sprites.front_default;
-  pokeTipo = data.types[0].type.name;
+  pokeTypes = data.types.map((element) => element.type.name);
   pokeLife = data.stats[0].base_stat;
   pokeAtack = data.stats[1].base_stat;
   pokeDefense = data.stats[2].base_stat;
@@ -113,7 +113,7 @@ searchButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
   const clearEngine = new ClearSearch();
   clearEngine.clear();
-})
+});
 
 window.onload = () => {
   getPokemons();
@@ -219,14 +219,12 @@ const appendElements = () => {
 
   pokemonObject.typesContainer.appendChild(pokemonObject.typesHeader);
   pokemonObject.typesContainer.appendChild(pokemonObject.typesList);
-  //dummy_info["types"].map((type) => {
-  //let pokemonType = document.createElement("li");
-  //pokemonType.innerHTML = type;
-  //typesContainer.appendChild(pokemonType);
-  //});
-  let pokemonType = document.createElement("li");
-  pokemonType.innerHTML = pokeTipo;
-  pokemonObject.typesContainer.appendChild(pokemonType);
+
+  pokeTypes.forEach((type) => {
+    let pokemonType = document.createElement("li");
+    pokemonType.innerHTML = type;
+    pokemonObject.typesContainer.appendChild(pokemonType);
+  });
 
   pokemonObject.mainInfo.appendChild(pokemonObject.pokemonName);
   pokemonObject.pokemonName.appendChild(pokemonObject.pokemonUrl);
