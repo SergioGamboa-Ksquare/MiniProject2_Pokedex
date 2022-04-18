@@ -7,7 +7,7 @@ class SearchPokemon {
 
     const nodeList = container.childNodes;
     const searchedPokemon = searchInput.value.toLowerCase();
-    
+
     let found = false;
 
     for (let i = 0; i < nodeList.length; i++) {
@@ -15,9 +15,11 @@ class SearchPokemon {
       if (
         element.firstChild.firstChild.firstChild.innerHTML === searchedPokemon
       ) {
-        found = true;
-        container.classList.add("wrapper-search");
-        element.classList.add("item-found");
+        if (!element.classList.contains("hidden")) {
+          found = true;
+          container.classList.add("wrapper-search");
+          element.classList.add("item-found");
+        }
       } else {
         element.classList.add("hidden");
       }
