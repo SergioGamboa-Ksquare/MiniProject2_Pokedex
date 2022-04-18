@@ -1,14 +1,16 @@
-class SearchPokemon {
-  searchPokemon = () => {
+import { Card } from "./app.js";
+
+class SearchEngine {
+  search = () => {
     const container = document.querySelector(".wrapper");
     const searchInput = document.querySelector(".text-input");
     const clearInput = document.querySelector(".clear-input");
-    const failedSearch = document.querySelector(".failed-search");
+    const searchFailed = document.querySelector(".failed-search");
 
     const nodeList = container.childNodes;
     const searchedPokemon = searchInput.value.toLowerCase();
 
-    let found = false;
+    let foundExisting = false;
 
     for (let i = 0; i < nodeList.length; i++) {
       const element = nodeList[i];
@@ -16,19 +18,27 @@ class SearchPokemon {
         element.firstChild.firstChild.firstChild.innerHTML === searchedPokemon
       ) {
         if (!element.classList.contains("hidden")) {
-          found = true;
-          container.classList.add("wrapper-search");
+          foundExisting = true;
           element.classList.add("item-found");
+          if (!searchFailed.classList.contains("hidden")) {
+            searchFailed.classList.add("hidden");
+          }
         }
       } else {
         element.classList.add("hidden");
       }
     }
-    if (!found) {
-      failedSearch.classList.remove("hidden");
+    if (!foundExisting) {
+      let pokemonCard = new Card();
+      pokemonCard.getPokemonData(
+        "https://pokeapi.co/api/v2/pokemon/" + searchedPokemon, "true"
+      );
+      if (!searchFailed.classList.contains("hidden")) {
+        searchFailed.classList.add("hidden");
+      }
     }
     clearInput.classList.remove("hidden");
   };
 }
 
-export { SearchPokemon };
+export { SearchEngine };
