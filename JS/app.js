@@ -174,22 +174,22 @@ const assignPropierties = () => {
 
   pokemonObject.typesHeader.innerHTML = "Types:";
 
-  pokemonObject.hpIcon.src = "../IMG/hp.png";
+  pokemonObject.hpIcon.src = "./IMG/hp.png";
   pokemonObject.hpTitle.innerHTML = "HP";
   pokemonObject.hpStat.innerHTML = pokeLife;
   pokemonObject.hpIcon.classList.add("stat-icon");
 
-  pokemonObject.attackIcon.src = "../IMG/attack.png";
+  pokemonObject.attackIcon.src = "./IMG/attack.png";
   pokemonObject.attackTitle.innerHTML = "Attack";
   pokemonObject.attackStat.innerHTML = pokeAtack;
   pokemonObject.attackIcon.classList.add("stat-icon");
 
-  pokemonObject.defIcon.src = "../IMG/defense.png";
+  pokemonObject.defIcon.src = "./IMG/defense.png";
   pokemonObject.defTitle.innerHTML = "Defense";
   pokemonObject.defStat.innerHTML = pokeDefense;
   pokemonObject.defIcon.classList.add("stat-icon");
 
-  pokemonObject.speedIcon.src = "../IMG/speed.png";
+  pokemonObject.speedIcon.src = "./IMG/speed.png";
   pokemonObject.speedTitle.innerHTML = "Speed";
   pokemonObject.speedStat.innerHTML = pokeSpeed;
   pokemonObject.speedIcon.classList.add("stat-icon");
