@@ -1,7 +1,7 @@
 # Pokedex-App
 ## Team Members
 ### Juan Pablo Tututi
-### Sergio Gamboa Juan Pablo Tututi
+### Sergio Gamboa
 ## SecondProject
 | User Stories     | Sergio | Juan Pablo |
 | ---------------- | :--: | ---: |
@@ -15,4 +15,4 @@
 | 8. The Pokedex must include a clickable element that will reset the search value and return to the 12 Pokémon you initially show   |     |  x |
 | 9. The app should work and look fine in a 320px width viewport  |     |    x  |
 ## Live Version
-[LiveServer](https://sergiogamboa-ksquare.github.io/MiniProject2_Pokedex/)
+[Pokedex App](https://sergiogamboa-ksquare.github.io/MiniProject2_Pokedex/)
