@@ -8,11 +8,10 @@ class ClearSearch {
     const nodeList = container.childNodes;
     for (let i = 0; i < nodeList.length; i++) {
       const element = nodeList[i];
-      if (
-        element.classList.contains("hidden")
-      ) {
+      if (element.classList.contains("hidden")) {
         element.classList.remove("hidden");
-      } else {
+      } 
+      if (element.classList.contains("item-found")) {
         element.classList.remove("item-found");
       }
     }
